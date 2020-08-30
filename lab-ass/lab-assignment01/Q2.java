@@ -2,10 +2,10 @@ import java.util.Vector;
 import java.util.Iterator;
 import java.util.Arrays;
 
-class Main {
-    public static String doubleSpeak(String S, Vector V){           // or well :\ 
+class Q2 {  // Change to Main if you're using an online compiler
+    public static String doubleSpeak(String S, Vector V){           // or well :\
         char tArr[] = S.toCharArray();
-        
+
         for (Iterator<String> iter = V.iterator(); iter.hasNext(); ) {  //iterating-on-elements-of-vec
             String temp = iter.next();
             System.out.println(temp);
@@ -25,16 +25,16 @@ class Main {
         return op;
     }
 
-    
+
     public static void main(String[] args) {
         Vector vecOfStrings = new Vector();
         vecOfStrings.add("happy");
         vecOfStrings.add("fun");
         //vecOfStrings.add("Elation");
-        
+
         String ipString = System.console().readLine();
         String opString = doubleSpeak(ipString, vecOfStrings);
-        
+
         System.out.println(opString);
         //System.out.println(vecOfStrings);
         //System.out.println(ipString);
