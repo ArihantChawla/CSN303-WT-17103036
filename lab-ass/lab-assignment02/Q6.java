@@ -5,7 +5,7 @@
 
 import java.util.*;
 
-public class Main
+public class Main // Ik it's called Q6 but I am compiling online so please bear
 {
 	    public static void main(String[]args){
 	        Scanner sc=new Scanner(System.in);
