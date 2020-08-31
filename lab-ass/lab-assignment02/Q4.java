@@ -1,4 +1,4 @@
-/*
+/*3
  * 4. Find the smallest n such that Σi = i^2 where 1 ≤ i ≤ n is too large to be represented as an int.
  * BY THE FOLLOWING BASIC MATH
   |    i*(i+1)/2 =  i*i
