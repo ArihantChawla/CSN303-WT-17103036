@@ -8,7 +8,7 @@
  * Kya hai ye question? I mean, okay...
  */
 
- public class Main // Ik it's called Q3 but I am compiling at onlineGDB so please bear
+ public class Main // Ik it's called Q4 but I am compiling at onlineGDB so please bear
  {
  	    public static void main(String[]args){
              System.out.println("n = 1");
