@@ -1,0 +1,9 @@
+As we can see, for very small inputs, using a hashset performs better (on average) than implementing a hash table using an Array object.
+
+This is particularly true for intersection and complement. For union, however, an array implementation performs better.
+
+All in all, since the input size was so small (11 elements in the universal set), any discussion related to execution time is ultimately futile.
+
+A good way to measure the same would have been to vary the size of U to 11, 101, 1001 and so on and recording the difference and thus plotting a comparatove graph of Array vs HashSet.
+
+The results from Q5a and Q5b for the same input is present in the files Q5a.png and Q5b.png, rerspectively.
