@@ -4,6 +4,8 @@ import java.util.*;
 import java.io.FileOutputStream;
 import java.io.File;
 import java.lang.*;
+import java.net.*;
+import java.io.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -15,6 +17,7 @@ class Main{
         FileWriter myWriter = new FileWriter("faculty-urls.csv");
         Document doc = Jsoup.connect(url).get();
         Elements links = doc.select("li.list-group-item> a[href]");
+        myWriter.write("Department,Faculty Url\n");
         for(Element link: links){
             String src = link.attr("href");
             StringBuilder str = new StringBuilder(primaryUrl);
@@ -39,11 +42,11 @@ class Main{
 //
     }
 
-    public static void createCSVfromUrl(String url,String op) throws IOException{
+    public static void createCSVfromUrl(String url) throws IOException{
         Document doc = Jsoup.connect(url).get();
         System.out.println(doc.title());
-        FileWriter myWriter = new FileWriter(op);
-
+        FileWriter myWriter = new FileWriter("all-tags.csv");
+        myWriter.write("HTML Tag,Tag Text\n");
 
         //<p>
         Elements ps = doc.select("p");
@@ -87,32 +90,55 @@ class Main{
             if(src!=null && src.length() != 0)
                 myWriter.write("img,"+src+"\n");
         }
-
-        //a[href]
-        Elements links = doc.select("a[href]");
-        for (Element link : links) {
-            myWriter.write("a,"+ link.text() + "," + link.absUrl("href")+"\n");
-//            System.out.println(link.text());
-        }
-
         myWriter.close();
 
+        //a[href]
+
+        FileWriter linkWriter = new FileWriter("link-tags.csv");
+        linkWriter.write("Link Text,URL\n");
+        Elements links = doc.select("a[href]");
+        for (Element link : links) {
+            //myWriter.write("a,"+ link.text() + "," + link.absUrl("href")+"\n");
+            if(link.text().length()!=0 && link.absUrl("href").length()!=0)
+                linkWriter.write(link.text() + "," + link.absUrl("href")+"\n");
+//            System.out.println(link.text());
+        }
+        linkWriter.close();
+    }
+
+    public static void downloadFile(String link) throws IOException{
+        System.out.println("opening connection");
+        URL url = new URL(link);
+        InputStream in = url.openStream();
+        String[] fn = link.split("/");
+        String fileName = fn[fn.length-1];
+        FileOutputStream fos = new FileOutputStream(new File(fileName));
+
+        System.out.println("reading from resource and writing to file...");
+        int length = -1;
+        byte[] buffer = new byte[1024];// buffer for portion of edata from connection
+        while ((length = in.read(buffer)) > -1) {
+            fos.write(buffer, 0, length);
+        }
+        fos.close();
+        in.close();
+        System.out.println("File downloaded");
     }
 
     public static void main(String[] args) throws IOException{
 
+
+        //Part A
         String primaryUrl = "https://pec.ac.in";
-        createCSVfromUrl(primaryUrl,"all-tags.csv");
+        createCSVfromUrl(primaryUrl);
 
-
+        //Part C (Using StringBuilder (For Part B))
         String deptUrl = "https://pec.ac.in/departments";
         facultyUrls(deptUrl,primaryUrl);
 
-        //FileWriter myWriter = new FileWriter("multilevel-urls.csv");
-        //extractUrls(primaryUrl,0,myWriter);
-        //myWriter.close();
-
-
+        //Part D
+        String dwdUrl = "http://www.cs.sjtu.edu.cn/~jiangli/teaching/CS222/files/materials/Algorithm%20Design.pdf";
+        downloadFile(dwdUrl);
     }
 
 
