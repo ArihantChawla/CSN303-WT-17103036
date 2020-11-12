@@ -1,0 +1,68 @@
+<head>
+    <title>Q4</title>
+</head>
+<body>
+    <form>
+        <label>Enter widthof the tree: </label>
+        <input type="text" id="width" name="width">
+        <br>
+        <label>Enter no of rows in the tree: </label>
+        <input type="text" id="rows" name="rows">
+        <br>
+        <input type="submit" value="Submit" id="myButton">
+        <br><input type="reset">
+    </form>
+
+</body>
+
+<script>
+
+    document.getElementById("myButton").addEventListener("click", function()
+    {
+        //Reads number of rows to be printed
+        var width = document.getElementById("width").value;
+        var rows = document.getElementById("rows").value;
+
+        width=width/2;
+        var i;
+        var j;
+        for(var row=0;row<rows;row++)
+        {
+            for(i=0;i<width;i++)
+            {
+                for(j=width-i; j>=0; j--)
+                {
+                    document.write('&nbsp;&nbsp;');
+                }
+
+                for(j=0; j<(2*i+1); j++)
+                {
+                    if(row==0 && j==0 && i==0)
+                    {
+                        document.write("*");
+                    }
+                    else
+                    {
+                        document.write("0");
+                    }
+                }
+                document.write("<br>");
+            }
+        }
+
+        for(j=0;j<10;j++)
+        {
+            for(i=0;i<width;i++)
+            {
+                document.write('&nbsp;&nbsp;');
+            }
+            for(i=0;i<=2;i++)
+            {
+                document.write("0");
+            }
+            document.write("<br>");
+        }
+
+    }, false);
+</script>
+</html>
